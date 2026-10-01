@@ -1,15 +1,101 @@
-# Autonomous Tax Audit Swarm System (ATAS) 🤖📊
+# GST SETU SYSTEM — Autonomous Tax Audit Swarm (ATAS) 🤖📊
 
 An AI-powered, multi-agent autonomous tax audit swarm designed to streamline invoice auditing, ledger reconciliation, anomaly detection, and tax compliance checks.
+
+---
+
+## 🏛️ System Architecture
+
+```text
+                    ┌─────────────────────────────┐
+                    │      GST SETU SYSTEM        │
+                    │   AI-Powered GST Auditing   │
+                    └──────────────┬──────────────┘
+                                   │
+                                   ▼
+                    ┌─────────────────────────────┐
+                    │     FastAPI Orchestrator    │
+                    │        (Manager Agent)      │
+                    │  • Receives Invoice & Data  │
+                    │  • Coordinates Agents       │
+                    │  • Controls Workflow        │
+                    └──────────────┬──────────────┘
+                                   │
+                 ┌─────────────────┼─────────────────┐
+                 │                 │                 │
+                 ▼                 ▼                 ▼
+       ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+       │ Agent 1         │ │ Agent 2         │ │ Agent 3         │
+       │ Vision          │ │ Ledger          │ │ Tax             │
+       │ Extractor       │ │ Detective       │ │ Inspector       │
+       ├─────────────────┤ ├─────────────────┤ ├─────────────────┤
+       │ Tool: Gemini    │ │ Tool: Database  │ │ Tool: ChromaDB  │
+       │ Vision          │ │                 │ │ + RAG           │
+       │                 │ │                 │ │                 │
+       │ Task: Extract   │ │ Task: Cross-    │ │ Task: Verify    │
+       │ invoice data    │ │ check vendor &  │ │ tax calculations│
+       │ from messy      │ │ internal ledger │ │ against GST     │
+       │ invoices        │ │ data            │ │ laws            │
+       └────────┬────────┘ └────────┬────────┘ └────────┬────────┘
+                │                   │                   │
+                └───────────────────┼───────────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │    Audit & Decision     │
+                       │         Engine          │
+                       ├─────────────────────────┤
+                       │ • Valid Invoice         │
+                       │ • Vendor Mismatch       │
+                       │ • Tax Mismatch          │
+                       │ • Suspicious Invoice    │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+                       ┌─────────────────────────┐
+                       │   Explainable Audit     │
+                       │         Report          │
+                       ├─────────────────────────┤
+                       │ • Extracted Data        │
+                       │ • Detected Anomalies    │
+                       │ • Tax Calculation       │
+                       │ • GST Law Citations     │
+                       │ • Final Audit Status    │
+                       └─────────────────────────┘
+```
+
+---
+
+## 🔄 Audit Workflow Pipeline
+
+```text
+Invoice
+   ↓
+Vision Extractor
+   ↓
+Structured Invoice Data
+   ↓
+Ledger Detective
+   ↓
+Vendor Verification
+   ↓
+Tax Inspector + RAG
+   ↓
+GST Calculation & Law Verification
+   ↓
+Audit Decision
+   ↓
+Explainable Audit Report
+```
 
 ---
 
 ## 🌟 Key Features
 
 - **Multi-Agent Swarm Architecture**:
-  - **Agent 1: Vision / OCR Agent** – Extracts invoice data (vendor name, invoice number, line items, totals, dates) from PDFs and images using Gemini Vision models.
-  - **Agent 2: Ledger Reconciliation Agent** – Matches extracted invoices against historical ledger entries and bank transaction statements to flag discrepancies or duplicates.
-  - **Agent 3: Tax Compliance & RAG Agent** – Queries ChromaDB vector store with tax regulations and GST/income tax codes to verify rate accuracy, calculate potential penalties, and identify non-compliance.
+  - **Agent 1: Vision Extractor** – Extracts invoice data (vendor name, invoice number, line items, totals, dates) from PDFs and messy invoices using Gemini Vision models.
+  - **Agent 2: Ledger Detective** – Cross-checks extracted invoices against historical ledger entries and bank transaction statements to flag discrepancies, ghost invoices, or price alterations.
+  - **Agent 3: Tax Inspector (RAG)** – Queries ChromaDB vector store with tax regulations and GST/income tax codes to verify rate accuracy, calculate potential penalties, and cite specific legal clauses.
 - **Interactive Full-Stack Dashboard**:
   - Audit overview with key health metrics, compliance scores, and risk heatmaps.
   - Granular invoice explorer, vendor risk profiling, and live audit logs.
@@ -20,18 +106,16 @@ An AI-powered, multi-agent autonomous tax audit swarm designed to streamline inv
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- **Framework**: React 19 with Vite & TypeScript
-- **Styling**: Tailwind CSS & Lucide Icons
-- **Charts**: Recharts
-- **Routing & Networking**: React Router v7 & Axios
+```text
+───────────────── TECH STACK ─────────────────
 
-### Backend
-- **Framework**: FastAPI (Python 3.10+) with Uvicorn
-- **AI / LLM**: Google Gemini (`google-generativeai`)
-- **Vector Database**: ChromaDB (for tax rule RAG retrieval)
-- **Relational Database**: PostgreSQL (Neon Serverless Postgres)
-- **Validation**: Pydantic
+Backend       : Python + FastAPI
+Vision        : Gemini Vision (google-generativeai)
+Database      : PostgreSQL / MongoDB
+RAG           : ChromaDB
+Frontend      : React 19 + TypeScript + Vite + Tailwind CSS
+Architecture  : Multi-Agent AI
+```
 
 ---
 
@@ -41,7 +125,7 @@ An AI-powered, multi-agent autonomous tax audit swarm designed to streamline inv
 - Node.js (v18+ recommended)
 - Python (v3.10+ recommended)
 - Google Gemini API Key
-- Neon PostgreSQL connection string
+- Neon PostgreSQL / Database connection string
 
 ---
 
@@ -115,7 +199,7 @@ An AI-powered, multi-agent autonomous tax audit swarm designed to streamline inv
 
 ## 🔒 Security & Privacy
 
-- Sensitive environment variables (`.env`, `backend/.env`) are excluded from version control via `.gitignore`.
+- Sensitive environment variables (`.env`, `backend/.env`, `frontend/.env`) are excluded from version control via `.gitignore`.
 - Always supply your own API keys and database credentials during deployment.
 
 ---
