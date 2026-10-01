@@ -2,6 +2,10 @@
 
 An AI-powered, multi-agent autonomous tax audit swarm designed to streamline invoice auditing, ledger reconciliation, anomaly detection, and tax compliance checks.
 
+[![Pitch Deck](https://img.shields.io/badge/Pitch%20Deck-Google%20Slides-EA4335?style=for-the-badge&logo=googleslides&logoColor=white)](https://docs.google.com/presentation/d/1Tu4IX3E479yz5gPbIXwz6iRB6VI5DRNl/edit?usp=sharing&ouid=118239967987397448881&rtpof=true&sd=true)
+
+> 📽️ **Presentation / Pitch Deck**: [**View Pitch Deck on Google Slides**](https://docs.google.com/presentation/d/1Tu4IX3E479yz5gPbIXwz6iRB6VI5DRNl/edit?usp=sharing&ouid=118239967987397448881&rtpof=true&sd=true)
+
 ---
 
 ## 🏛️ System Architecture
@@ -201,6 +205,10 @@ Architecture  : Multi-Agent AI
 
 - Sensitive environment variables (`.env`, `backend/.env`, `frontend/.env`) are excluded from version control via `.gitignore`.
 - Always supply your own API keys and database credentials during deployment.
+
+## 📌 Resources & Pitch Deck
+
+- 📊 **Pitch Deck**: [GST Setu System Presentation (Google Slides)](https://docs.google.com/presentation/d/1Tu4IX3E479yz5gPbIXwz6iRB6VI5DRNl/edit?usp=sharing&ouid=118239967987397448881&rtpof=true&sd=true)
 
 ---
 
