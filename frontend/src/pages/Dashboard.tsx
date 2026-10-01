@@ -139,12 +139,12 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const customTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ color: string; name: string; value: number }>; label?: string }) => {
+  const customTooltip = ({ active, payload, label }: any) => {
     if (active && payload?.length) {
       return (
         <div className="glass-card p-3 text-xs">
           <p className="text-slate-400 mb-1">{label}</p>
-          {payload.map((p) => (
+          {payload.map((p: any) => (
             <p key={p.name} style={{ color: p.color }}>{p.name}: {p.value}</p>
           ))}
         </div>

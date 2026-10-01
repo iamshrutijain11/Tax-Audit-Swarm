@@ -316,12 +316,22 @@ async def audit_invoice(file: UploadFile = File(...)):
                 final_status = "FLAGGED"
                 final_reason = ledger_result["error_message"]
             else:
+                # Agent 2 passed — check if bank payment is cleared or pending
+                payment_status = ledger_result.get("payment_status", "N/A")
+
                 tax_result = await check_tax_compliance(extracted_data, invoice_id)
                 await manager.broadcast({"invoice_id": invoice_id, "agent": "Agent3_Tax", "status": tax_result["is_compliant"]})
 
                 if not tax_result["is_compliant"]:
                     final_status = "FLAGGED"
                     final_reason = tax_result["rule_cited"]
+                elif payment_status == "PENDING":
+                    # Tax OK but bank payment not yet recorded — approved with advisory note
+                    final_status = "APPROVED"
+                    final_reason = (
+                        "GST compliance verified. Invoice recorded in ledger. "
+                        "Note: Bank payment not yet found — please confirm payment once cleared."
+                    )
 
         await manager.broadcast({"invoice_id": invoice_id, "agent": "Pipeline", "status": final_status})
         _save_or_update_audited_invoice(extracted_data, invoice_id, final_status)
@@ -357,13 +367,23 @@ async def re_audit_invoice(invoice_id: str):
             _update_invoice_status(invoice_id, "FLAGGED")
             return AuditResponse(status="FLAGGED", reason=ledger_result["error_message"], extracted_data=extracted_data)
 
+        payment_status = ledger_result.get("payment_status", "N/A")
+
         tax_result = await check_tax_compliance(extracted_data, invoice_id)
         if not tax_result["is_compliant"]:
             _update_invoice_status(invoice_id, "FLAGGED")
             return AuditResponse(status="FLAGGED", reason=tax_result["rule_cited"], extracted_data=extracted_data)
 
+        if payment_status == "PENDING":
+            final_reason = (
+                "GST compliance verified. Invoice recorded in ledger. "
+                "Note: Bank payment not yet found — please confirm payment once cleared."
+            )
+        else:
+            final_reason = "Re-audit passed all checks"
+
         _update_invoice_status(invoice_id, "APPROVED")
-        return AuditResponse(status="APPROVED", reason="Re-audit passed all checks", extracted_data=extracted_data)
+        return AuditResponse(status="APPROVED", reason=final_reason, extracted_data=extracted_data)
 
     except HTTPException:
         raise
@@ -714,8 +734,11 @@ def list_vendors():
 
 @app.post("/vendors")
 def create_vendor(payload: VendorCreate):
-    if len(payload.vendor_gstin) != 15:
+    gstin = payload.vendor_gstin.strip().upper()
+    if len(gstin) != 15:
         raise HTTPException(status_code=400, detail="vendor_gstin must be exactly 15 characters.")
+    state = (payload.state_code.strip().upper() if payload.state_code else gstin[:2]) or "99"
+    name = payload.vendor_name.strip()
 
     conn = None
     cursor = None
@@ -726,9 +749,13 @@ def create_vendor(payload: VendorCreate):
             """
             INSERT INTO vendors (vendor_gstin, vendor_name, state_code, risk_score)
             VALUES (%s, %s, %s, %s)
+            ON CONFLICT (vendor_gstin) DO UPDATE SET
+                vendor_name = EXCLUDED.vendor_name,
+                state_code = EXCLUDED.state_code,
+                risk_score = EXCLUDED.risk_score
             RETURNING *;
             """,
-            (payload.vendor_gstin, payload.vendor_name, payload.state_code, payload.risk_score)
+            (gstin, name, state, payload.risk_score)
         )
         new_vendor = cursor.fetchone()
         conn.commit()

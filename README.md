@@ -95,9 +95,9 @@ An AI-powered, multi-agent autonomous tax audit swarm designed to streamline inv
 
 ### Frontend Setup
 
-1. **Navigate to the root directory**:
+1. **Navigate to the frontend directory**:
    ```bash
-   cd ..
+   cd frontend
    ```
 
 2. **Install frontend dependencies**:
