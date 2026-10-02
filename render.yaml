@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: atas-backend
+    runtime: python
+    rootDir: Backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python init_db.py && python init_rag.py && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: NEON_DATABASE_URL
+        sync: false
+      - key: BUYER_GSTIN
+        value: 09AAACR5055K1Z5
