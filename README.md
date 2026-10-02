@@ -3,11 +3,11 @@
 An AI-powered, multi-agent autonomous tax audit swarm designed to streamline invoice auditing, ledger reconciliation, anomaly detection, and tax compliance checks.
 
 [![Live Web App](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://gst-setu.vercel.app/)
-[![Backend API](https://img.shields.io/badge/Backend%20API-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://gst-setu-backend-6sea.onrender.com/docs)
+[![Backend API](https://img.shields.io/badge/Backend%20API-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://gst-setu-backend-6sea.onrender.com)
 [![Pitch Deck](https://img.shields.io/badge/Pitch%20Deck-Google%20Slides-EA4335?style=for-the-badge&logo=googleslides&logoColor=white)](https://docs.google.com/presentation/d/1Tu4IX3E479yz5gPbIXwz6iRB6VI5DRNl/edit?usp=sharing&ouid=118239967987397448881&rtpof=true&sd=true)
 
 > 🚀 **Live Web Application**: [**https://gst-setu.vercel.app**](https://gst-setu.vercel.app/)  
-> ⚡ **Live Backend API & Docs**: [**https://gst-setu-backend-6sea.onrender.com/docs**](https://gst-setu-backend-6sea.onrender.com/docs)  
+> ⚡ **Live Backend API**: [**https://gst-setu-backend-6sea.onrender.com**](https://gst-setu-backend-6sea.onrender.com)  
 > 🔑 **Demo Credentials**: Username: `admin` | Password: `admin123`  
 > 📽️ **Presentation / Pitch Deck**: [**View Pitch Deck on Google Slides**](https://docs.google.com/presentation/d/1Tu4IX3E479yz5gPbIXwz6iRB6VI5DRNl/edit?usp=sharing&ouid=118239967987397448881&rtpof=true&sd=true)
 
@@ -215,7 +215,6 @@ Architecture  : Multi-Agent AI
 
 - 🌐 **Live Web Application (Vercel)**: [https://gst-setu.vercel.app](https://gst-setu.vercel.app/)
 - ⚙️ **Production Backend API (Render)**: [https://gst-setu-backend-6sea.onrender.com](https://gst-setu-backend-6sea.onrender.com)
-- 📖 **Interactive Swagger Docs**: [https://gst-setu-backend-6sea.onrender.com/docs](https://gst-setu-backend-6sea.onrender.com/docs)
 - 📊 **Pitch Deck**: [GST Setu System Presentation (Google Slides)](https://docs.google.com/presentation/d/1Tu4IX3E479yz5gPbIXwz6iRB6VI5DRNl/edit?usp=sharing&ouid=118239967987397448881&rtpof=true&sd=true)
 
 ---
