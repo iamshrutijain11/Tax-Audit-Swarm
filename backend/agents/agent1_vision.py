@@ -14,7 +14,7 @@ if not GEMINI_API_KEY:
 
 genai.configure(api_key=GEMINI_API_KEY)
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-3.8-flash"
 
 EXTRACTION_PROMPT = """You are a highly precise automated tax extraction AI. Analyze the attached invoice and extract the required details, including the invoice_number printed on the document. Output MUST be valid JSON only matching the provided schema. Ensure base_amount + tax_amount = total_amount. If the image is blurry or unreadable, set the confidence_score below 0.85."""
 
