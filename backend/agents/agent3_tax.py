@@ -20,7 +20,7 @@ if not GEMINI_API_KEY:
 genai.configure(api_key=GEMINI_API_KEY)
 
 EMBEDDING_MODEL = "models/gemini-embedding-001"
-LLM_MODEL = "gemini-2.5-flash"
+LLM_MODEL = "gemini-3.8-flash"
 AGENT_NAME = "Agent 3 - Tax Inspector"
 GST_RATE = 0.18
 TAX_TOLERANCE = 1.00  # rupees, allows for rounding differences
